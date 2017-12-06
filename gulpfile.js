@@ -80,3 +80,8 @@ gulp.task('imageMin', () => {
 /////////////////////////////////
 
 gulp.task('default', ['serve']);
+
+gulp.task('minify', ['html', 'sass', 'js', 'imageMin'], () => {
+    console.log('Tylko minifikacja.');
+    process.exit(1);
+});
