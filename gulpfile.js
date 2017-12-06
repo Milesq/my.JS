@@ -11,7 +11,8 @@ var browser = require('browser-sync');
 const source = {
     html: 'app/*.html',
     dist: 'dist/',
-    css: 'app/css/style.scss',
+    css: 'app/css/*.scss',
+    cssMain: 'app/css/style.scss',
     cssDist: 'dist/css/',
     js: ['app/js/*.js', '!app/js/*.min.js'],
     jsDist: 'dist/js/',
@@ -49,7 +50,7 @@ gulp.task('html', () => {
 });
 
 gulp.task('sass', () => {
-    gulp.src(source.css)
+    gulp.src(source.cssMain)
         .pipe(sm.init())
         .pipe(sass())
         .pipe(minCss())

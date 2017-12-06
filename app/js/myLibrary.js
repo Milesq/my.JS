@@ -4,6 +4,10 @@ var lib;
     var el = [];
     var /*const*/ myName = 'my';
 
+    el[3] = document.createElement('div');
+    el[3].id = myName + 'modal';
+    body.appendChild(el[3]);
+
     el[2] = document.createElement('button');
     el[2].className = 'no-visibility';
     el[2].id = 'forClose';
@@ -29,7 +33,7 @@ var lib;
         $('#dark').removeClass('no-visibility');
     }
 
-    function setModal(content, option) {
+    function setModalWindow(content, option) {
         dark();
         var setting = {
             backgroundColor: '#FFF5E4',
@@ -45,10 +49,10 @@ var lib;
 
         $('#forClose')
             .removeClass('no-visibility')
-            .on('click', deleteModal);
+            .on('click', deleteModalWindow);
     }
 
-    function deleteModal() {
+    function deleteModalWindow() {
         $('#workSpan')
             .addClass('no-visibility')
             .html('')
@@ -61,7 +65,6 @@ var lib;
         .each(function () {
             $(this).addClass('no-visibility')
                 .attr('id', 'now');
-            console.log(this);
             if (/{+}/.exec($('#now > .' + myName + 'ModalSettings').text()) === null) {
                 $('#now > .' + myName + 'ModalSettings').html('{ "color":"#000" }');
             }
@@ -71,24 +74,55 @@ var lib;
             };
 
             if ($('#now > .' + myName + 'ModalSettings').length !== 0) {
-                console.log('d');
                 option.settings = $.parseJSON($('#now > .' + myName + 'ModalSettings').text());
             }
 
             $('#now + .' + myName + 'ModalOpen')
                 .on('click', option,
                     function (event) {
-                        setModal(event.data.content, event.data.settings);
+                        setModalWindow(event.data.content, event.data.settings);
                     }
                 );
             $('#now').attr('id', '');
         });
+    ////////////////////////////////////////myModal you can create modal by: div.Modal > .ModalSettings + .ModalContent ^ button.ModalOpen
+    function setModal(options) { //{ from: 'top', to: 'bottom'}
+        var settings = {
+            from: 'left'
+        };
+        $.extend(settings, options);
+        if (typeof settings.to === 'undefined') {
+            settings.to = settings.from;
+        }
 
+        var set;
+
+        if (settings.from == 'top') set = {
+            top: '0vw'
+        };
+        if (settings.from == 'bottom') set = {
+            bottom: '0vw'
+        };
+        if (settings.from == 'left') set = {
+            left: '0vw'
+        };
+        if (settings.from == 'right') set = {
+            right: '0vw'
+        };
+        console.log(set);
+        $('#' + myName + 'modal').animate(set, 2700);
+
+    };
+    setModal({
+        from: 'left'
+    });
+    //////////////////////////////////////////
     lib = {
         dark: dark,
         light: light,
         setModal: setModal,
-        deleteModal: deleteModal
+        setModalWindow: setModalWindow,
+        deleteModalWindow: deleteModalWindow
     };
 
 

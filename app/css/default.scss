@@ -50,5 +50,17 @@ body {
     width: $buttonWidth;
     z-index: 150;
     color: #D9D919;
+}
 
+#mymodal {
+    $backgroundColorModal: #b9bdc1;
+    position: fixed;
+    width: $modalWidth;
+    border: 2px solid ($backgroundColorModal + #111111);
+    background-color: $backgroundColorModal;
+    top: 50vh - $modalWidth / 2;
+    left: -100vw;
+    color: #FF0000;
+    border-radius: 15%;
+    padding: 3%;
 }
