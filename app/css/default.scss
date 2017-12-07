@@ -53,7 +53,6 @@ body {
 }
 
 #mymodal {
-    $backgroundColorModal: #b9bdc1;
     position: fixed;
     width: $modalWidth;
     border: 2px solid ($backgroundColorModal + #111111);
@@ -63,4 +62,17 @@ body {
     color: #FF0000;
     border-radius: 15%;
     padding: 3%;
+
+    button {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        @include button(5vw, (5vh / 3) * 2);
+        transition: linear all .3s;
+        &:hover {
+            background-color: rgba($backgroundButton, .3);
+        }
+
+    }
+
 }

@@ -1,1 +1,1 @@
-moje 
+Biblioteka js

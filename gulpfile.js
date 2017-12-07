@@ -6,8 +6,10 @@ var sass = require('gulp-sass');
 var imgMin = require('gulp-imagemin');
 var minCss = require('gulp-clean-css');
 var sm = require('gulp-sourcemaps');
-var concat = require('concat');
+//var concat = require('concat');
 var browser = require('browser-sync');
+var fs = require('fs');
+var unload = require('unload');
 const source = {
     html: 'app/*.html',
     dist: 'dist/',
@@ -80,9 +82,32 @@ gulp.task('imageMin', () => {
 });
 /////////////////////////////////
 
-gulp.task('default', ['serve']);
+gulp.task('default', ['serve', 'timer']);
 
 gulp.task('minify', ['html', 'sass', 'js', 'imageMin'], () => {
     console.log('Tylko minifikacja.');
     process.exit(1);
+});
+
+///////////////////////////////
+gulp.task('timer', () => {
+    var time = new Date();
+    var timeOfCode = [];
+    timeOfCode[0] = time.getTime();
+    var date = [];
+    date[0] = '[' + time.getHours() + ':' + time.getMinutes() + ':' + time.getSeconds() + ']>' + time.getDate() + '.' + ((time.getMonth() - 0) + 1) + '.' + time.getFullYear();
+    console.log('Praca rozpoczęta: ', date[0]);
+
+    var stop = unload.add(() => {
+        var now = new Date();
+        date[1] = '[' + now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds() + ']>' + now.getDate() + '.' + ((now.getMonth() - 0) + 1) + '.' + now.getFullYear();
+
+        date[2] = '////////////////////////////////////////\n' +
+            date[0] +
+            '\n////////////////////////////////////////\n' +
+            date[1] + '\n\n';
+
+        fs.appendFileSync('logs.md', date[2], 'utf-8', 'a');
+        console.log('Koniec pracy: ' + date[1]);
+    });
 });

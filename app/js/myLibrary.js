@@ -7,6 +7,7 @@ var lib;
     el[3] = document.createElement('div');
     el[3].id = myName + 'modal';
     body.appendChild(el[3]);
+    document.getElementById(myName + 'modal').innerHTML = '<button>Zamknij</button>';
 
     el[2] = document.createElement('button');
     el[2].className = 'no-visibility';
@@ -53,6 +54,7 @@ var lib;
     }
 
     function deleteModalWindow() {
+
         $('#workSpan')
             .addClass('no-visibility')
             .html('')
@@ -85,8 +87,19 @@ var lib;
                 );
             $('#now').attr('id', '');
         });
-    ////////////////////////////////////////myModal you can create modal by: div.Modal > .ModalSettings + .ModalContent ^ button.ModalOpen
+    ////////////////////////////////////////myModal you can create modal by:
     function setModal(options) { //{ from: 'top', to: 'bottom'}
+
+        if ($('#' + myName + 'modal>button').attr('is') == 'true') {
+
+            console.log('Warning');
+            return;
+        }
+
+        $('#' + myName + 'modal>button')
+            .attr('is', 'false')
+            .on('click', deleteModal);
+
         var settings = {
             from: 'left'
         };
@@ -100,19 +113,35 @@ var lib;
         if (settings.from == 'top') set = {
             top: '0vw'
         };
+
         if (settings.from == 'bottom') set = {
             bottom: '0vw'
         };
+
         if (settings.from == 'left') set = {
             left: '0vw'
         };
+
         if (settings.from == 'right') set = {
             right: '0vw'
         };
-        console.log(set);
+
         $('#' + myName + 'modal').animate(set, 2700);
 
     };
+
+    function deleteModal() {
+        if ($('#' + myName + 'modal>button').attr('is') != 'true') {
+            return '';
+        }
+
+
+        $('#' + myName + 'modal>button')
+            .attr('is', 'false')
+            .off('click');
+        console.log($('#' + myName + 'modal>button'));
+
+    }
     setModal({
         from: 'left'
     });
