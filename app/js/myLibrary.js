@@ -81,68 +81,52 @@ var lib;
 
             $('#now + .' + myName + 'ModalOpen')
                 .on('click', option,
-                    function (event) {
+                    (event) => {
                         setModalWindow(event.data.content, event.data.settings);
                     }
                 );
             $('#now').attr('id', '');
         });
     ////////////////////////////////////////myModal you can create modal by:
-    function setModal(options) { //{ from: 'top', to: 'bottom'}
-
-        if ($('#' + myName + 'modal>button').attr('is') == 'true') {
-
-            console.log('Warning');
-            return;
-        }
-
-        $('#' + myName + 'modal>button')
-            .attr('is', 'false')
-            .on('click', deleteModal);
+    function setModal(content, options) { //{ from: 'top', to: 'bottom'}
 
         var settings = {
             from: 'left'
         };
+
         $.extend(settings, options);
+
         if (typeof settings.to === 'undefined') {
             settings.to = settings.from;
         }
 
         var set;
 
-        if (settings.from == 'top') set = {
+        if (settings.to == 'top') set = {
             top: '0vw'
         };
 
-        if (settings.from == 'bottom') set = {
+        if (settings.to == 'bottom') set = {
             bottom: '0vw'
         };
 
-        if (settings.from == 'left') set = {
+        if (settings.to == 'left') set = {
             left: '0vw'
         };
 
-        if (settings.from == 'right') set = {
+        if (settings.to == 'right') set = {
             right: '0vw'
         };
 
+        eval(`function stop()
+                        {
+        console.log('stop');
+                        }`);
         $('#' + myName + 'modal').animate(set, 2700);
-
-    };
-
-    function deleteModal() {
-        if ($('#' + myName + 'modal>button').attr('is') != 'true') {
-            return '';
-        }
-
-
-        $('#' + myName + 'modal>button')
-            .attr('is', 'false')
-            .off('click');
-        console.log($('#' + myName + 'modal>button'));
-
+        $('#' + myName + 'modal > button').on('click', stop);
     }
-    setModal({
+
+    var x = setModal('a', {
         from: 'left'
     });
     //////////////////////////////////////////

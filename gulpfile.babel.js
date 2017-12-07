@@ -10,6 +10,7 @@ var sm = require('gulp-sourcemaps');
 var browser = require('browser-sync');
 var fs = require('fs');
 var unload = require('unload');
+var babel = require('gulp-babel');
 const source = {
     html: 'app/*.html',
     dist: 'dist/',
@@ -63,6 +64,9 @@ gulp.task('sass', () => {
 
 gulp.task("js", () => {
     gulp.src(source.js)
+        .pipe(babel({
+            presets: ['es2015']
+        }))
         .pipe(uglify())
         .on('error', function (err) {
             console.log(err.cause);
