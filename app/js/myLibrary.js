@@ -146,9 +146,8 @@ var lib;
         }
 
         function stop(data) {
-            let to;
+            let to, set;
             (!(typeof data.data.to === 'undefined'))? to = data.data.to : to = data;
-            let set;
 
             if (to == 'top') {
                 set = {
@@ -180,12 +179,12 @@ var lib;
                 .animate(set, 2700);
         }
 
-        $('#' + myName + 'modal').animate(set, 2700);
+        $('#' + myName + 'modal')
+            .html($('#' + myName + 'modal').html() + content)
+            .animate(set, 2700);
         $('#' + myName + 'modal > button').on('click', settings, stop);
         return stop;
     }
-
-    var x = setModal('a');
     //////////////////////////////////////////
     lib = {
         dark: dark,

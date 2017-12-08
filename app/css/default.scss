@@ -54,10 +54,12 @@ body {
 
 #mymodal {
     position: fixed;
+    left: -100vw;
     width: $modalWidth;
     border: 2px solid ($backgroundColorModal + #111111);
     background-color: $backgroundColorModal;
-    color: #FF0000;
+    color: #000;
+    text-align: left;
     border-radius: 15%;
     padding: 3%;
 
