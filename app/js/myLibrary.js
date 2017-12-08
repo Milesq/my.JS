@@ -100,35 +100,92 @@ var lib;
             settings.to = settings.from;
         }
 
-        var set;
+        let set;
 
-        if (settings.to == 'top') set = {
-            top: '0vw'
-        };
+        if (settings.from == 'top') {
+            set = {
+                top: '0vh'
+            };
+            $('#' + myName + 'modal')
+                .removeClass('centerH')
+                .addClass('centerW')
+                .css('top', '-100vh');
+        }
 
-        if (settings.to == 'bottom') set = {
-            bottom: '0vw'
-        };
 
-        if (settings.to == 'left') set = {
-            left: '0vw'
-        };
+        if (settings.from == 'bottom') {
+            set = {
+                bottom: '0vh'
+            };
+            $('#' + myName + 'modal')
+                .removeClass('centerH')
+                .addClass('centerW')
+                .css('bottom', '-100vh');
+        }
 
-        if (settings.to == 'right') set = {
-            right: '0vw'
-        };
 
-        eval(`function stop()
-                        {
-        console.log('stop');
-                        }`);
+        if (settings.from == 'left') {
+            set = {
+                left: '0vw'
+            };
+            $('#' + myName + 'modal')
+                .removeClass('centerW')
+                .addClass('centerH')
+                .css('left', '-100vh');
+        }
+
+
+        if (settings.from == 'right') {
+            set = {
+                right: '0vw'
+            };
+            $('#' + myName + 'modal')
+                .removeClass('centerW')
+                .addClass('centerH')
+                .css('right', '-100vh');
+        }
+
+        function stop(data) {
+            let to;
+            (!(typeof data.data.to === 'undefined'))? to = data.data.to : to = data;
+            let set;
+
+            if (to == 'top') {
+                set = {
+                    top: '-100vh'
+                };
+            }
+
+
+            if (to == 'bottom') {
+                set = {
+                    bottom: '-100vh'
+                };
+            }
+
+
+            if (to == 'left') {
+                set = {
+                    left: '-100vw'
+                };
+            }
+
+
+            if (to == 'right') {
+                set = {
+                    right: '-100vw'
+                };
+            }
+            $('#' + myName + 'modal')
+                .animate(set, 2700);
+        }
+
         $('#' + myName + 'modal').animate(set, 2700);
-        $('#' + myName + 'modal > button').on('click', stop);
+        $('#' + myName + 'modal > button').on('click', settings, stop);
+        return stop;
     }
 
-    var x = setModal('a', {
-        from: 'left'
-    });
+    var x = setModal('a');
     //////////////////////////////////////////
     lib = {
         dark: dark,

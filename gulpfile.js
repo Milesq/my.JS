@@ -106,10 +106,29 @@ gulp.task('timer', () => {
         var now = new Date();
         date[1] = '[' + now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds() + ']>' + now.getDate() + '.' + ((now.getMonth() - 0) + 1) + '.' + now.getFullYear();
 
+        timeOfCode[1] = now.getTime();
+        timeOfCode = Math.round((timeOfCode[1] - timeOfCode[0]) / 1000);
+
+        function howManyTime(time) {
+            let min, minT, hours, sek;
+            sek = time % 60;
+            minT = (time - sek) / 60;
+
+            min = minT % 60;
+            hours = (minT - min) / 60;
+
+
+            return [hours, min, sek];
+        }
+
+        timeOfCode = howManyTime(timeOfCode);
+        timeOfCode = timeOfCode[0] + 'H ' + timeOfCode[1] + 'min. ' + timeOfCode[2] + 's';
+
         date[2] = '////////////////////////////////////////\n' +
             date[0] +
             '\n////////////////////////////////////////\n' +
-            date[1] + '\n\n';
+            date[1] +
+            '\nCzas pracy: ' + timeOfCode + '\n\n';
 
         fs.appendFileSync('logs.md', date[2], 'utf-8', 'a');
         console.log('Koniec pracy: ' + date[1]);

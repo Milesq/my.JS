@@ -57,8 +57,6 @@ body {
     width: $modalWidth;
     border: 2px solid ($backgroundColorModal + #111111);
     background-color: $backgroundColorModal;
-    top: 50vh - $modalWidth / 2;
-    left: -100vw;
     color: #FF0000;
     border-radius: 15%;
     padding: 3%;
@@ -69,10 +67,21 @@ body {
         right: 0px;
         @include button(5vw, (5vh / 3) * 2);
         transition: linear all .3s;
+
         &:hover {
             background-color: rgba($backgroundButton, .3);
         }
 
     }
 
+}
+
+.centerH {
+    margin-top: 50vh - ( $modalHeight / 2);
+    margin-bottom: 50vh - ( $modalHeight / 2);
+}
+
+.centerW {
+    margin-left: 50vw - ($modalWidth / 2);
+    margin-right: 50vw - ( $modalWidth / 2);
 }
