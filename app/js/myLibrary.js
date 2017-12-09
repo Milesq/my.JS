@@ -8,7 +8,6 @@ var lib;
     el[3].id = myName + 'modal';
     body.appendChild(el[3]);
     document.getElementById(myName + 'modal').innerHTML = '<button>Zamknij</button>';
-
     el[2] = document.createElement('button');
     el[2].className = 'no-visibility';
     el[2].id = 'forClose';
@@ -25,6 +24,10 @@ var lib;
     el[0].className = 'no-visibility';
     el[0].id = 'workSpan';
     body.appendChild(el[0]);
+    
+    function clearPosition(toClearing) {
+    $(toClearing).css({left: '0px', top: '0px'});
+    }
 
     function light() {
         $('#dark').addClass('no-visibility');
@@ -194,9 +197,11 @@ var lib;
         return [stop, settings.to];
     } 
     
-    
+    $('#mymodal').css('left', '50vw');
+    $('#mymodal').css('bottom', '50vw');
+    clearPosition('#mymodal');
     //nie działa: top bottom; bottom top; left right; 
-    var x = setModal('abcdefghijklmnoprstuwixz', {from: 'top', to: 'bottom'});
+   // var x = setModal('abcdefghijklmnoprstuwixz', {from: 'top', to: 'bottom'});
     //////////////////////////////////////////
     lib = {
         dark: dark,
