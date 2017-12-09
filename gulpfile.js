@@ -132,5 +132,6 @@ gulp.task('timer', () => {
 
         fs.appendFileSync('logs.md', date[2], 'utf-8', 'a');
         console.log('Koniec pracy: ' + date[1]);
+        console.log('Czas pracy: ' + timeOfCode);
     });
 });

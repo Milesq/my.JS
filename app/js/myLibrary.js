@@ -102,6 +102,14 @@ var lib;
 
         let set;
 
+        if ((settings.from != 'top' && settings.from != 'right' && settings.from != 'bottom' && settings.from != 'left')) {
+            settings.from = 'left';
+        }
+
+        if ((settings.to != 'top' && settings.to != 'right' && settings.to != 'bottom' && settings.to != 'left')) {
+            settings.to = 'left';
+        }
+        
         if (settings.from == 'top') {
             set = {
                 top: '0vh'
@@ -147,7 +155,7 @@ var lib;
 
         function stop(data) {
             let to, set;
-            (!(typeof data.data.to === 'undefined'))? to = data.data.to : to = data;
+            (!(typeof data.data.to === 'undefined')) ? to = data.data.to: to = data;
 
             if (to == 'top') {
                 set = {
@@ -183,8 +191,12 @@ var lib;
             .html($('#' + myName + 'modal').html() + content)
             .animate(set, 2700);
         $('#' + myName + 'modal > button').on('click', settings, stop);
-        return stop;
-    }
+        return [stop, settings.to];
+    } 
+    
+    
+    //nie działa: top bottom; bottom top; left right; 
+    var x = setModal('abcdefghijklmnoprstuwixz', {from: 'top', to: 'bottom'});
     //////////////////////////////////////////
     lib = {
         dark: dark,
