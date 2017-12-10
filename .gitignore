@@ -4,4 +4,4 @@ app/img/
 *.bat
 logs.md
 ~*.*
-# test
+*lock.json
