@@ -3,3 +3,4 @@ dist/
 app/img/
 *.bat
 logs.md
+~*.*
