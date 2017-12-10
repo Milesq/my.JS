@@ -9,6 +9,7 @@ var sm = require('gulp-sourcemaps');
 //var concat = require('concat');
 var browser = require('browser-sync');
 var fs = require('fs');
+var x = 'x';
 var unload = require('unload');
 var babel = require('gulp-babel');
 const source = {
