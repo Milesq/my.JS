@@ -1,13 +1,21 @@
 var lib;
 (function ($) {
-    var body = document.getElementsByTagName('body')[0];
+    const body = document.getElementsByTagName('body')[0];
     var el = [];
-    var /*const*/ myName = 'my';
+    const myName = 'my';
+
+    el[4] = document.createElement('div');
+    el[4].id = myName + 'modalWrapper';
+    body.appendChild(el[4]);
+
+    const modaLWrapper = document.querySelector('#' + myName + 'modalWrapper');
 
     el[3] = document.createElement('div');
+    el[3].className = 'no-visibility';
     el[3].id = myName + 'modal';
-    body.appendChild(el[3]);
+    modaLWrapper.appendChild(el[3]);
     document.getElementById(myName + 'modal').innerHTML = '<button>Zamknij</button>';
+
     el[2] = document.createElement('button');
     el[2].className = 'no-visibility';
     el[2].id = 'forClose';
@@ -24,10 +32,6 @@ var lib;
     el[0].className = 'no-visibility';
     el[0].id = 'workSpan';
     body.appendChild(el[0]);
-    
-    function clearPosition(toClearing) {
-    $(toClearing).css({left: '0px', top: '0px'});
-    }
 
     function light() {
         $('#dark').addClass('no-visibility');
@@ -113,14 +117,16 @@ var lib;
             settings.to = 'left';
         }
         
+        $('#mymodal').removeClass('no-visibility');
+
         if (settings.from == 'top') {
             set = {
                 top: '0vh'
             };
             $('#' + myName + 'modal')
-                .removeClass('centerH')
-                .addClass('centerW')
-                .css('top', '-100vh');
+//                .removeClass('centerH')
+//                .addClass('centerW')
+                .css({top: '-100vh', left: 0, bottom: 0, right: 0});
         }
 
 
@@ -129,8 +135,8 @@ var lib;
                 bottom: '0vh'
             };
             $('#' + myName + 'modal')
-                .removeClass('centerH')
-                .addClass('centerW')
+//                .removeClass('centerH')
+//                .addClass('centerW')
                 .css('bottom', '-100vh');
         }
 
@@ -140,8 +146,8 @@ var lib;
                 left: '0vw'
             };
             $('#' + myName + 'modal')
-                .removeClass('centerW')
-                .addClass('centerH')
+//                .removeClass('centerW')
+//                .addClass('centerH')
                 .css('left', '-100vh');
         }
 
@@ -151,14 +157,16 @@ var lib;
                 right: '0vw'
             };
             $('#' + myName + 'modal')
-                .removeClass('centerW')
-                .addClass('centerH')
+//                .removeClass('centerW')
+//                .addClass('centerH')
                 .css('right', '-100vh');
         }
 
         function stop(data) {
             let to, set;
             (!(typeof data.data.to === 'undefined')) ? to = data.data.to: to = data;
+
+            $('#mymodal').addClass('no-visibility');
 
             if (to == 'top') {
                 set = {
@@ -193,15 +201,15 @@ var lib;
         $('#' + myName + 'modal')
             .html($('#' + myName + 'modal').html() + content)
             .animate(set, 2700);
+
         $('#' + myName + 'modal > button').on('click', settings, stop);
+
         return [stop, settings.to];
-    } 
-    
-    $('#mymodal').css('left', '50vw');
-    $('#mymodal').css('bottom', '50vw');
-    clearPosition('#mymodal');
+    }
+
+    //    clearPosition('#mymodal');
     //nie działa: top bottom; bottom top; left right; 
-   // var x = setModal('abcdefghijklmnoprstuwixz', {from: 'top', to: 'bottom'});
+    var x = setModal('abcdefghijklmnoprstuwixz');
     //////////////////////////////////////////
     lib = {
         dark: dark,
