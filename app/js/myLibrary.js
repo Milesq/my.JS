@@ -13,7 +13,7 @@ var lib;
     el[3] = document.createElement('div');
     el[3].className = 'no-visibility';
     el[3].id = myName + 'modal';
-    modaLWrapper.appendChild(el[3]);
+    body.appendChild(el[3]);
     document.getElementById(myName + 'modal').innerHTML = '<button>Zamknij</button>';
 
     el[2] = document.createElement('button');
@@ -116,7 +116,7 @@ var lib;
         if ((settings.to != 'top' && settings.to != 'right' && settings.to != 'bottom' && settings.to != 'left')) {
             settings.to = 'left';
         }
-        
+
         $('#mymodal').removeClass('no-visibility');
 
         if (settings.from == 'top') {
@@ -124,9 +124,14 @@ var lib;
                 top: '0vh'
             };
             $('#' + myName + 'modal')
-//                .removeClass('centerH')
-//                .addClass('centerW')
-                .css({top: '-100vh', left: 0, bottom: 0, right: 0});
+                //                .removeClass('centerH')
+                //                .addClass('centerW')
+                .css({
+                    left: '',
+                    top: '-100vh',
+                    right: '50vw',
+                    bottom: ''
+                });
         }
 
 
@@ -135,9 +140,14 @@ var lib;
                 bottom: '0vh'
             };
             $('#' + myName + 'modal')
-//                .removeClass('centerH')
-//                .addClass('centerW')
-                .css('bottom', '-100vh');
+                //                .removeClass('centerH')
+                //                .addClass('centerW')
+                .css({
+                    left: '',
+                    top: '',
+                    right: '50vw',
+                    bottom: '-100vh'
+                });
         }
 
 
@@ -146,9 +156,14 @@ var lib;
                 left: '0vw'
             };
             $('#' + myName + 'modal')
-//                .removeClass('centerW')
-//                .addClass('centerH')
-                .css('left', '-100vh');
+                //                .removeClass('centerW')
+                //                .addClass('centerH')
+                .css({
+                    left: '-100vh',
+                    top: '50vh',
+                    right: '',
+                    bottom: ''
+                });
         }
 
 
@@ -157,18 +172,28 @@ var lib;
                 right: '0vw'
             };
             $('#' + myName + 'modal')
-//                .removeClass('centerW')
-//                .addClass('centerH')
-                .css('right', '-100vh');
+                //                .removeClass('centerW')
+                //                .addClass('centerH')
+                .css({
+                    left: '',
+                    top: '50vh',
+                    right: '-100vh',
+                    bottom: ''
+                });
         }
 
         function stop(data) {
             let to, set;
             (!(typeof data.data.to === 'undefined')) ? to = data.data.to: to = data;
 
-            $('#mymodal').addClass('no-visibility');
-
             if (to == 'top') {
+                $('#' + myName + 'modal')
+                    .css({
+                        bottom: '',
+                        right: '',
+                        left: ''
+                    });
+
                 set = {
                     top: '-100vh'
                 };
@@ -176,6 +201,13 @@ var lib;
 
 
             if (to == 'bottom') {
+                $('#' + myName + 'modal')
+                    .css({
+                        top: '',
+                        right: '',
+                        left: ''
+                    });
+
                 set = {
                     bottom: '-100vh'
                 };
@@ -183,6 +215,13 @@ var lib;
 
 
             if (to == 'left') {
+                $('#' + myName + 'modal')
+                    .css({
+                        top: '',
+                        bottom: '',
+                        right: ''
+                    });
+
                 set = {
                     left: '-100vw'
                 };
@@ -190,12 +229,21 @@ var lib;
 
 
             if (to == 'right') {
+                $('#' + myName + 'modal')
+                    .css({
+                        top: '',
+                        bottom: '',
+                        left: ''
+                    });
+
                 set = {
                     right: '-100vw'
                 };
             }
             $('#' + myName + 'modal')
-                .animate(set, 2700);
+                .animate(set, 2700, () => {
+                    $('#mymodal').addClass('no-visibility');
+                });
         }
 
         $('#' + myName + 'modal')
@@ -209,7 +257,10 @@ var lib;
 
     //    clearPosition('#mymodal');
     //nie działa: top bottom; bottom top; left right; 
-    var x = setModal('abcdefghijklmnoprstuwixz');
+    var x = setModal('abcdefghijklmnoprstuwixz', {
+        from: 'bottom',
+        to: 'top'
+    });
     //////////////////////////////////////////
     lib = {
         dark: dark,
