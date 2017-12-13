@@ -1,7 +1,7 @@
-/*$phone:;
-$tablet:;
-$PC:;
-$lgPC:;*/
+$phone: 'only screen and (max-device-width: 480px)';
+$tablet: '(max-width: 1000px) AND (min-width: 701px)';
+$PC: '(max-width: 1600px) AND (min-width: 1001px)';
+$lgPC: '(min-width: 1601px)';
 
 $buttonPositionY: 10%;
 $buttonHeight: 5%;

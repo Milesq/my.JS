@@ -59,8 +59,8 @@ gulp.task('sass', () => {
         .pipe(sass())
         .pipe(minCss())
         .pipe(sm.write())
-        .pipe(gulp.dest(source.cssDist));
-    browser.reload();
+        .pipe(gulp.dest(source.cssDist))
+        .pipe(browser.stream());
 });
 
 gulp.task("js", () => {

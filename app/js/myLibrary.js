@@ -124,8 +124,6 @@ var lib;
                 top: '0vh'
             };
             $('#' + myName + 'modal')
-                //                .removeClass('centerH')
-                //                .addClass('centerW')
                 .css({
                     left: '',
                     top: '-100vh',
@@ -140,8 +138,6 @@ var lib;
                 bottom: '0vh'
             };
             $('#' + myName + 'modal')
-                //                .removeClass('centerH')
-                //                .addClass('centerW')
                 .css({
                     left: '',
                     top: '',
@@ -156,8 +152,6 @@ var lib;
                 left: '0vw'
             };
             $('#' + myName + 'modal')
-                //                .removeClass('centerW')
-                //                .addClass('centerH')
                 .css({
                     left: '-100vh',
                     top: '50vh',
@@ -172,8 +166,6 @@ var lib;
                 right: '0vw'
             };
             $('#' + myName + 'modal')
-                //                .removeClass('centerW')
-                //                .addClass('centerH')
                 .css({
                     left: '',
                     top: '50vh',
@@ -187,7 +179,7 @@ var lib;
             (!(typeof data.data.to === 'undefined')) ? to = data.data.to: to = data;
 
             if (to == 'top') {
-                $('#' + myName + 'modal')
+               $('#' + myName + 'modal')
                     .css({
                         bottom: '',
                         right: '',
@@ -214,13 +206,13 @@ var lib;
             }
 
 
-            if (to == 'left') {
-                $('#' + myName + 'modal')
-                    .css({
-                        top: '',
-                        bottom: '',
-                        right: ''
-                    });
+            if (to == 'left') {console.log('x');
+                /* $('#' + myName + 'modal')
+                     .css({
+                         top: '',
+                         bottom: '',
+                         right: ''
+                     });*/
 
                 set = {
                     left: '-100vw'
@@ -257,7 +249,7 @@ var lib;
 
     //    clearPosition('#mymodal');
     //nie działa: top bottom; bottom top; left right; 
-    var x = setModal('abcdefghijklmnoprstuwixz', {
+    var x = setModal('abcdef ghijkl mnoprst uwixz', {
         from: 'bottom',
         to: 'top'
     });
