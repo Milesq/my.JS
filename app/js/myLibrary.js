@@ -14,7 +14,7 @@ var lib;
     el[3].className = 'no-visibility';
     el[3].id = myName + 'modal';
     body.appendChild(el[3]);
-    document.getElementById(myName + 'modal').innerHTML = '<button>Zamknij</button>';
+    document.getElementById(myName + 'modal').innerHTML = '<button class="closeButton">Zamknij</button>';
 
     el[2] = document.createElement('button');
     el[2].className = 'no-visibility';
@@ -175,16 +175,13 @@ var lib;
         }
 
         function stop(data) {
-            let to, set;
+            let to, set, setCss;
             (!(typeof data.data.to === 'undefined')) ? to = data.data.to: to = data;
 
             if (to == 'top') {
-               $('#' + myName + 'modal')
-                    .css({
-                        bottom: '',
-                        right: '',
-                        left: ''
-                    });
+                setCss = {
+                    top: $('#'+myName+'modal').css('height')
+                };
 
                 set = {
                     top: '-100vh'
@@ -193,12 +190,9 @@ var lib;
 
 
             if (to == 'bottom') {
-                $('#' + myName + 'modal')
-                    .css({
-                        top: '',
-                        right: '',
-                        left: ''
-                    });
+                setCss = {
+                    top: ''
+                };
 
                 set = {
                     bottom: '-100vh'
@@ -206,13 +200,11 @@ var lib;
             }
 
 
-            if (to == 'left') {console.log('x');
-                /* $('#' + myName + 'modal')
-                     .css({
-                         top: '',
-                         bottom: '',
-                         right: ''
-                     });*/
+            if (to == 'left') {
+                setCss = {
+                    bottom: '',
+                    right: ''
+                };
 
                 set = {
                     left: '-100vw'
@@ -221,18 +213,19 @@ var lib;
 
 
             if (to == 'right') {
-                $('#' + myName + 'modal')
-                    .css({
-                        top: '',
-                        bottom: '',
-                        left: ''
-                    });
+                setCss = {
+                    bottom: '',
+                    left: ''
+                };
 
                 set = {
                     right: '-100vw'
                 };
             }
+
+
             $('#' + myName + 'modal')
+                .css(setCss)
                 .animate(set, 2700, () => {
                     $('#mymodal').addClass('no-visibility');
                 });
@@ -246,9 +239,16 @@ var lib;
 
         return [stop, settings.to];
     }
-
-    //    clearPosition('#mymodal');
-    //nie działa: top bottom; bottom top; left right; 
+    /*fixme bottom top;
+    left bottom;
+    top bottom;
+    right bottom;
+    top left;
+    top bottom;
+    top left;
+    right bottom;
+    right left;
+*/
     var x = setModal('abcdef ghijkl mnoprst uwixz', {
         from: 'bottom',
         to: 'top'
