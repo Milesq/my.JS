@@ -97,6 +97,16 @@ var lib;
     ////////////////////////////////////////myModal you can create modal by:
     function setModal(content, options) { //{ from: 'top', to: 'bottom'}
 
+        function clearPosition(what) {
+            what.css({
+                top: 'auto',
+                bottom: 'auto',
+                left: 'auto',
+                right: 'auto'
+            });
+        }
+        clearPosition($('#' + myName + 'modal'));
+
         var settings = {
             from: 'left'
         };
@@ -107,7 +117,7 @@ var lib;
             settings.to = settings.from;
         }
 
-        let set;
+        let set, setCss;
 
         if ((settings.from != 'top' && settings.from != 'right' && settings.from != 'bottom' && settings.from != 'left')) {
             settings.from = 'left';
@@ -116,116 +126,117 @@ var lib;
         if ((settings.to != 'top' && settings.to != 'right' && settings.to != 'bottom' && settings.to != 'left')) {
             settings.to = 'left';
         }
-
-        $('#mymodal').removeClass('no-visibility');
-
+        $('#' + myName + 'modal').removeClass('no-visibility')
+        //////////////////////////////////////////
         if (settings.from == 'top') {
-            set = {
-                top: '0vh'
+
+            setCss = {
+                top: '-100vh',
+                left: ((window.innerWidth / 2) - parseInt($('#' + myName + 'modal').css('width')) / 2) + 'px'
             };
-            $('#' + myName + 'modal')
-                .css({
-                    left: '',
-                    top: '-100vh',
-                    right: '50vw',
-                    bottom: ''
-                });
+
+            set = {
+                top: '0px'
+            };
         }
 
 
         if (settings.from == 'bottom') {
-            set = {
-                bottom: '0vh'
+
+            setCss = {
+                bottom: '-100vh',
+                left: ((window.innerWidth / 2) - parseInt($('#' + myName + 'modal').css('width')) / 2) + 'px'
             };
-            $('#' + myName + 'modal')
-                .css({
-                    left: '',
-                    top: '',
-                    right: '50vw',
-                    bottom: '-100vh'
-                });
+
+            set = {
+                bottom: '0px'
+            };
         }
 
 
         if (settings.from == 'left') {
-            set = {
-                left: '0vw'
+
+            setCss = {
+                left: '-100vw',
+                top: ((window.innerHeight / 2) - parseInt($('#' + myName + 'modal').css('height')) / 2) + 'px'
             };
-            $('#' + myName + 'modal')
-                .css({
-                    left: '-100vh',
-                    top: '50vh',
-                    right: '',
-                    bottom: ''
-                });
+
+            set = {
+                left: '0px'
+            };
         }
 
 
         if (settings.from == 'right') {
-            set = {
-                right: '0vw'
+
+            setCss = {
+                right: '-100vw',
+                top: ((window.innerHeight / 2) - parseInt($('#' + myName + 'modal').css('height')) / 2) + 'px'
             };
-            $('#' + myName + 'modal')
-                .css({
-                    left: '',
-                    top: '50vh',
-                    right: '-100vh',
-                    bottom: ''
-                });
+
+            set = {
+                right: '0px'
+            };
         }
 
         function stop(data) {
             let to, set, setCss;
             (!(typeof data.data.to === 'undefined')) ? to = data.data.to: to = data;
 
+            let x = $('#mymodal');
+
             if (to == 'top') {
+
                 setCss = {
-                    top: $('#'+myName+'modal').css('height')
+                    top: '',
+                    bottom: $('#' + myName + 'modal').css('bottom')
                 };
 
                 set = {
-                    top: '-100vh'
+                    bottom: '200vw'
                 };
             }
-
 
             if (to == 'bottom') {
+
                 setCss = {
-                    top: ''
+                    bottom: '',
+                    top: $('#' + myName + 'modal').css('top')
                 };
 
                 set = {
-                    bottom: '-100vh'
+                    top: '200vw'
                 };
             }
-
 
             if (to == 'left') {
+
                 setCss = {
-                    bottom: '',
-                    right: ''
+                    left: '',
+                    right: $('#' + myName + 'modal').css('right')
                 };
 
                 set = {
-                    left: '-100vw'
+                    right: '200vw'
                 };
             }
 
-
             if (to == 'right') {
+
                 setCss = {
-                    bottom: '',
-                    left: ''
+                    right: '',
+                    left: $('#' + myName + 'modal').css('left')
                 };
 
                 set = {
-                    right: '-100vw'
+                    left: '200vw'
                 };
             }
 
 
             $('#' + myName + 'modal')
                 .css(setCss)
+                //                .html('')
                 .animate(set, 2700, () => {
                     $('#mymodal').addClass('no-visibility');
                 });
@@ -233,25 +244,19 @@ var lib;
 
         $('#' + myName + 'modal')
             .html($('#' + myName + 'modal').html() + content)
+            .css(setCss)
             .animate(set, 2700);
 
         $('#' + myName + 'modal > button').on('click', settings, stop);
 
         return [stop, settings.to];
     }
-    /*fixme bottom top;
-    left bottom;
-    top bottom;
-    right bottom;
-    top left;
-    top bottom;
-    top left;
-    right bottom;
-    right left;
-*/
+
+
+    //NOTE wydaje mi się że wszystko dobrze
     var x = setModal('abcdef ghijkl mnoprst uwixz', {
         from: 'bottom',
-        to: 'top'
+        to: 'right'
     });
     //////////////////////////////////////////
     lib = {
