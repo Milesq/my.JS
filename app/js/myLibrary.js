@@ -1,3 +1,4 @@
+"use strict";
 var lib;
 (function ($) {
     const body = document.getElementsByTagName('body')[0];
@@ -94,8 +95,8 @@ var lib;
                 );
             $('#now').attr('id', '');
         });
-    ////////////////////////////////////////myModal you can create modal by:
-    function setModal(content, options) { //{ from: 'top', to: 'bottom'}
+    ////////////////////////////////////////myModal you can create modal by: div.myModal>.myModalSettings+.myModalContent^button.myModalOpen
+    function setModal(content, options) {
 
         function clearPosition(what) {
             what.css({
@@ -253,10 +254,29 @@ var lib;
     }
 
 
-    //NOTE wydaje mi się że wszystko dobrze
-    var x = setModal('abcdef ghijkl mnoprst uwixz', {
-        from: 'bottom',
-        to: 'right'
+    $('div.' + myName + 'Modal').each(function () {
+        $(this).addClass('no-visibility')
+                .attr('id', 'nowModal');
+            if (/{+}/.exec($('#nowModal > .' + myName + 'ModalSettings').text()) === null) {
+                $('#nowModal > .' + myName + 'ModalSettings').html('{ "from": "top" }');
+            }
+            var option = {
+                content: $('#nowModal > .' + myName + 'ModalContent').html(),
+                settings: ''
+            };
+
+            if ($('#nowModal > .' + myName + 'ModalSettings').length !== 0) {
+                option.settings = $.parseJSON($('#nowModal > .' + myName + 'ModalSettings').text());
+            }
+
+            $('#nowModal + .' + myName + 'ModalOpen')
+                .on('click', option,
+                    (event) => {
+                        setModal(event.data.content, event.data.settings);
+                    }
+                );
+            $('#nowModal').attr('id', '');
+        
     });
     //////////////////////////////////////////
     lib = {
